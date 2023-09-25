@@ -1,55 +1,79 @@
-#include "knight.h"
+#include "Knight.h"
 
-Knight::Knight(Texture2D *knight_idle, int screenWidth, int screenHeight) : knight_idle(knight_idle), screenWidth(screenWidth), screenHeight(screenHeight)
+Knight::Knight(Vector2 position) : position(position)
 {
-    currentFrame = 0;
-    framesCounter = 0;
-    framesPerSecond = 8;
+    speed = 2;
+    direction = 1;
 }
 
-Knight *Knight::make(const int screenWidth, const int screenHeight)
+Knight *Knight::make(Vector2 position)
 {
-    Texture2D *knight_idle = new Texture2D[10];
-    for (int i = 0; i < 10; i++)
-    {
-        char file[100];
-        snprintf(file, 100, "resources/knight/png/Idle (%d).png", i + 1);
-        knight_idle[i] = LoadTexture(file); // 587x707
-        if (knight_idle[i].height < knight_idle[i].width)
-        {
-            knight_idle[i].height = TEXTURE_SIZE * knight_idle[i].height / knight_idle[i].width;
-            knight_idle[i].width = TEXTURE_SIZE;
-        }
-        else
-        {
-            knight_idle[i].width = TEXTURE_SIZE * knight_idle[i].width / knight_idle[i].height;
-            knight_idle[i].height = TEXTURE_SIZE;
-        }
-    }
-    Knight *knight = new Knight(knight_idle, screenWidth, screenHeight);
+    Knight *knight = new Knight(position);
+    knight->addState("Idle", IdleState::make());
+    knight->addState("Walk", WalkState::make());
+    knight->setState("Idle");
     return knight;
 }
 
 void Knight::move()
 {
-    if (framesCounter++ >= 60 / framesPerSecond)
+    int x = 0, y = 0;
+    if (IsKeyDown(KEY_RIGHT))
     {
-        framesCounter = 0;
-        if (currentFrame++ >= 9)
-            currentFrame = 0;
+        x = 1;
+        direction = 1;
     }
+    else if (IsKeyDown(KEY_LEFT))
+    {
+        x = -1;
+        direction = -1;
+    }
+    else if (IsKeyDown(KEY_UP))
+    {
+        y = -1;
+    }
+    else if (IsKeyDown(KEY_DOWN))
+    {
+        y = 1;
+    }
+    if (x != 0 || y != 0)
+    {
+        setState("Walk");
+    }
+    else
+    {
+        setState("Idle");
+    }
+    position.x += x * speed;
+    position.y += y * speed;
+    state->move();
 }
 
 void Knight::draw()
 {
-    DrawTexture(knight_idle[currentFrame], screenWidth / 2, screenHeight / 2, WHITE);
+    state->draw(position, direction);
+}
+
+void Knight::addState(const std::string name, State *state)
+{
+    this->states.insert(std::make_pair(name, state));
+}
+
+void Knight::setState(std::string name)
+{
+    std::map<std::string, State *>::iterator itr = states.find(name);
+    if (itr != states.end())
+    {
+        this->state = itr->second;
+    }
 }
 
 Knight::~Knight()
 {
-    for (int i = 0; i < 10; i++)
+    for (std::map<std::string, State *>::iterator itr = states.begin(); itr != states.end(); itr++)
     {
-        UnloadTexture(knight_idle[i]);
+        delete (itr->second);
     }
-    delete[] knight_idle;
+    states.clear();
+    delete[] state;
 }

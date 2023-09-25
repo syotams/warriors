@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "raylib.h"
-#include "knight.h"
-#include "constants.h"
+#include "Knight.h"
+#include "Constants.h"
 
 int SCREEN_WIDTH = 0;
 int SCREEN_HEIGHT = 0;
@@ -17,7 +17,8 @@ int main()
     SetTargetFPS(60); // Set our game to run at 60 frames-per-second
                       //--------------------------------------------------------------------------------------
 
-    Knight *knight = Knight::make(SCREEN_WIDTH, SCREEN_HEIGHT);
+    Vector2 knightPosition({.x = 0.0f, .y = 0.0f});
+    Knight *knight = Knight::make(knightPosition);
 
     int currentFrame = 0;
     int framesCounter = 0;

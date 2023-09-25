@@ -1,6 +1,12 @@
 # Build main.c on PROJECT_NAME, I could call it wahtever I wanted
 add_executable(
-    main main.cpp knight.cpp
+    main 
+    Main.cpp 
+    Knight.cpp 
+    State.cpp 
+    IdleState.cpp 
+    WalkState.cpp 
+    #constrains/simple_constrain.cpp
 )
 
 target_link_libraries(main raylib)

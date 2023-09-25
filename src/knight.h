@@ -1,22 +1,25 @@
-#include <stdio.h>
+#include <iostream>
+#include <map>
 #include "raylib.h"
-#include "constants.h"
+#include "Constants.h"
+#include "IdleState.h"
+#include "WalkState.h"
 
 class Knight
 {
 private:
-    Texture2D *knight_idle;
+    std::map<std::string, State *> states;
+    State *state;
     Vector2 position;
-    int screenWidth;
-    int screenHeight;
-    int currentFrame;
-    int framesCounter;
-    int framesPerSecond;
+    int speed;
+    int direction;
 
-    Knight(Texture2D *knight_idle, int screenWidth, int screenHeight);
+    Knight(Vector2 position);
+    void setState(std::string name);
 
 public:
-    static Knight *make(const int screenWidth, const int screenHeight);
+    static Knight *make(Vector2 position);
+    void addState(const std::string name, State *state);
     void move();
     void draw();
     ~Knight();
