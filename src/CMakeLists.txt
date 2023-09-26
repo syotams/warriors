@@ -8,7 +8,8 @@ add_executable(
     WalkState.cpp 
     ImageLoader.cpp
     AttackState.cpp
-    #constrains/simple_constrain.cpp
+    Sprite.cpp
+    constrains/SimpleConstrain.cpp
 )
 
 target_link_libraries(main raylib)

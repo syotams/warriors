@@ -1,4 +1,4 @@
-#include "simple_constrain.h"
+#include "SimpleConstrain.h"
 
 SimpleConstrain::~SimpleConstrain()
 {

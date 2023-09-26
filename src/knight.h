@@ -14,10 +14,9 @@ private:
     std::map<KnightStates, State *> states;
     KnightStates currentState;
     Vector2 position;
-    int speed;
-    int stateTimer;
     Direction lookDirection[2];
     Direction walkDirection[2];
+    int speed;
 
     Knight(Vector2 position);
     void setState(KnightStates name);

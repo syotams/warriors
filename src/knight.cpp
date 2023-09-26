@@ -51,6 +51,7 @@ void Knight::move()
     if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))
     {
         setState(KnightStates::Attack);
+        speed = 0;
     }
     else if (x != 0 || y != 0)
     {
@@ -63,7 +64,6 @@ void Knight::move()
         speed = 0;
     }
 
-    stateTimer = stateTimer > 0 ? stateTimer - 1 : 0;
     position.x += (int)walkDirection[0] * speed;
     position.y += (int)walkDirection[1] * speed;
     getState()->move();

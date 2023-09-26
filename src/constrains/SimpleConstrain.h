@@ -3,8 +3,8 @@
 #define SIMPLE_HADER
 
 #include "raylib.h"
-#include "../sprite.h"
-#include "constrain.h"
+#include "../Sprite.h"
+#include "Constrain.h"
 
 class SimpleConstrain : public Constrain
 {
