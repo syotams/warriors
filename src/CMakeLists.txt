@@ -6,6 +6,7 @@ add_executable(
     State.cpp 
     IdleState.cpp 
     WalkState.cpp 
+    ImageLoader.cpp
     #constrains/simple_constrain.cpp
 )
 

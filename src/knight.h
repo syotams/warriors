@@ -4,22 +4,24 @@
 #include "Constants.h"
 #include "IdleState.h"
 #include "WalkState.h"
+#include "KnightStates.h"
+#include "Direction.h"
 
 class Knight
 {
 private:
-    std::map<std::string, State *> states;
+    std::map<KnightStates, State *> states;
     State *state;
     Vector2 position;
     int speed;
-    int direction;
+    Direction direction[2];
 
     Knight(Vector2 position);
-    void setState(std::string name);
+    void setState(KnightStates name);
 
 public:
     static Knight *make(Vector2 position);
-    void addState(const std::string name, State *state);
+    void addState(KnightStates name, State *state);
     void move();
     void draw();
     ~Knight();
