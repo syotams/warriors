@@ -13,13 +13,16 @@ WalkState *WalkState::make()
 
 void WalkState::draw(Vector2 position, Direction *direction)
 {
-    if (Direction::Right == direction[0])
+    switch (direction[0])
     {
+    case Direction::Right:
+    default:
         DrawTexture(rightSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
-    }
-    else if (Direction::Left == direction[0])
-    {
+        break;
+
+    case Direction::Left:
         DrawTexture(leftSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
+        break;
     }
 }
 

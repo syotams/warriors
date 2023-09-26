@@ -7,6 +7,7 @@ add_executable(
     IdleState.cpp 
     WalkState.cpp 
     ImageLoader.cpp
+    AttackState.cpp
     #constrains/simple_constrain.cpp
 )
 

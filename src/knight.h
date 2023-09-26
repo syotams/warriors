@@ -5,19 +5,23 @@
 #include "IdleState.h"
 #include "WalkState.h"
 #include "KnightStates.h"
+#include "AttackState.h"
 #include "Direction.h"
 
 class Knight
 {
 private:
     std::map<KnightStates, State *> states;
-    State *state;
+    KnightStates currentState;
     Vector2 position;
     int speed;
-    Direction direction[2];
+    int stateTimer;
+    Direction lookDirection[2];
+    Direction walkDirection[2];
 
     Knight(Vector2 position);
     void setState(KnightStates name);
+    State *getState();
 
 public:
     static Knight *make(Vector2 position);
