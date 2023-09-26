@@ -1,32 +1,37 @@
 #include "Sprite.h"
 
-void Sprite::setDirection(float x, float y)
+Sprite::Sprite(Vector2 position, Vector2 dimension, int maxSpeed) : position(position), dimension(dimension), maxSpeed(maxSpeed), speed(maxSpeed)
 {
-    if (0 != x)
+    setWalkDirection(Direction::None, Direction::Right);
+};
+
+void Sprite::setWalkDirection(Direction x, Direction y)
+{
+    if (Direction::None != x)
     {
-        direction.x = x;
-        direction.y = 0;
+        walkDirection.x = (float)x;
+        walkDirection.y = 0;
     }
-    if (0 != y)
+    if (Direction::None != y)
     {
-        direction.y = y;
-        direction.x = 0;
+        walkDirection.y = (float)y;
+        walkDirection.x = 0;
     }
 }
 
 void Sprite::moveBy(float x, float y)
 {
-    setDirection(x, y);
+    setWalkDirection((Direction)x, (Direction)y);
     if (x == 0 && y == 0)
     {
         speed = 0;
     }
     else
     {
-        speed = max_speed;
+        speed = maxSpeed;
     }
-    position.x += direction.x * speed;
-    position.y += direction.y * speed;
+    position.x += (int)walkDirection.x * speed;
+    position.y += (int)walkDirection.y * speed;
 }
 
 void Sprite::moveTo(float x, float y)
@@ -37,9 +42,11 @@ void Sprite::moveTo(float x, float y)
 
 void Sprite::flipDirection()
 {
-    direction.x *= -1;
-    direction.y *= -1;
-    moveBy(direction.x, direction.y);
+    walkDirection.x *= -1;
+    walkDirection.y *= -1;
+    lookDirection.x *= -1;
+    lookDirection.y *= -1;
+    moveBy(walkDirection.x, walkDirection.y);
 }
 
 Vector2 Sprite::center()
@@ -56,4 +63,19 @@ Rectangle Sprite::box()
 void Sprite::addConstrain(Constrain *constrain)
 {
     constrains.push_back(constrain);
+}
+
+std::vector<Constrain *> Sprite::getConstrains()
+{
+    return constrains;
+}
+
+Vector2 Sprite::getWalkDirection()
+{
+    return walkDirection;
+}
+
+Vector2 Sprite::getLookDirection()
+{
+    return lookDirection;
 }

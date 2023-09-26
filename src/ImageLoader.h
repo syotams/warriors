@@ -6,6 +6,6 @@
 #include "raylib.h"
 #include "Constants.h"
 
-std::array<Texture2D *, 2> load_lr_animated_images(int size, char *file_name);
+std::array<Texture2D *, 2> load_lr_animated_images(const int size, char *file_name, const int scale);
 
 #endif

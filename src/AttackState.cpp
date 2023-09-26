@@ -7,7 +7,7 @@ AttackState::AttackState(Texture2D *rightSidedTextures, Texture2D *leftSidedText
 
 AttackState *AttackState::make()
 {
-    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, "resources/knight/png/Attack (%d).png");
+    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, "resources/knight/png/Attack (%d).png", TEXTURE_SIZE);
     return new AttackState(_textures[0], _textures[1]);
 }
 

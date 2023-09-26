@@ -7,7 +7,7 @@ IdleState::IdleState(Texture2D *textures, Texture2D *leftSidedTextures) : State(
 
 IdleState *IdleState::make()
 {
-    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, "resources/knight/png/Idle (%d).png");
+    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, "resources/knight/png/Idle (%d).png", TEXTURE_SIZE);
     return new IdleState(_textures[0], _textures[1]);
 }
 

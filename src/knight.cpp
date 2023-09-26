@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-Knight::Knight(Vector2 position) : position(position)
+Knight::Knight(Vector2 position, Vector2 dimension, int max_size) : Sprite(position, dimension, max_size)
 {
     speed = 0;
     walkDirection[0] = Direction::None;
@@ -9,29 +9,38 @@ Knight::Knight(Vector2 position) : position(position)
 
 Knight *Knight::make(Vector2 position)
 {
-    Knight *knight = new Knight(position);
+    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, 2);
     knight->addState(KnightStates::Idle, IdleState::make());
     knight->addState(KnightStates::Walk, WalkState::make());
     knight->addState(KnightStates::Attack, AttackState::make());
     knight->setState(KnightStates::Idle);
+    knight->addConstrain(new SimpleConstrain(knight));
     return knight;
 }
 
 void Knight::move()
 {
+    std::array<int, 2> res = {0};
+    std::vector<Constrain *> constrains = getConstrains();
+    if (constrains.size() > 0)
+    {
+        for (auto constrain : constrains)
+        {
+            constrain->apply();
+        }
+    }
+
     int x = 0, y = 0;
     if (IsKeyDown(KEY_RIGHT))
     {
         x = 1;
         walkDirection[0] = Direction::Right;
-        lookDirection[0] = Direction::Right;
         walkDirection[1] = Direction::None;
     }
     else if (IsKeyDown(KEY_LEFT))
     {
         x = -1;
         walkDirection[0] = Direction::Left;
-        lookDirection[0] = Direction::Left;
         walkDirection[1] = Direction::None;
     }
     if (IsKeyDown(KEY_UP))
@@ -46,6 +55,9 @@ void Knight::move()
         walkDirection[1] = Direction::Down;
         walkDirection[0] = Direction::None;
     }
+
+    lookDirection[0] = walkDirection[0] != Direction::None ? walkDirection[0] : lookDirection[0];
+    lookDirection[1] = walkDirection[1] != Direction::None ? walkDirection[1] : lookDirection[1];
 
     // Handle attack states (temporary)
     if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))

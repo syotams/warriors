@@ -1,3 +1,6 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 17)
+
 # Build main.c on PROJECT_NAME, I could call it wahtever I wanted
 add_executable(
     main 

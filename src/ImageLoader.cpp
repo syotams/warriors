@@ -1,6 +1,6 @@
 #include "ImageLoader.h"
 
-std::array<int, 2> scale_image(int width, int height, int to_size)
+std::array<int, 2> scale_image(const int width, const int height, const int to_size)
 {
     int _width = 0, _height = 0;
     if (width > height)
@@ -16,12 +16,12 @@ std::array<int, 2> scale_image(int width, int height, int to_size)
     return {_width, _height};
 }
 
-std::array<Texture2D *, 2> load_lr_animated_images(int size, char *file_name)
+std::array<Texture2D *, 2> load_lr_animated_images(const int size, char *file_name, const int scale)
 {
     std::array<Texture2D *, 2> result;
     // TODO: Creating a new instance here is a dedicated to memory leakage, find another solution?
-    Texture2D *rightSidedTextures = new Texture2D[10];
-    Texture2D *leftSidedTextures = new Texture2D[10];
+    Texture2D *rightSidedTextures = new Texture2D[size];
+    Texture2D *leftSidedTextures = new Texture2D[size];
 
     for (int i = 0; i < size; i++)
     {
@@ -35,7 +35,7 @@ std::array<Texture2D *, 2> load_lr_animated_images(int size, char *file_name)
         leftSidedTextures[i] = LoadTextureFromImage(image);
         UnloadImage(image);
 
-        std::array<int, 2> new_size = scale_image(rightSidedTextures[i].width, rightSidedTextures[i].height, TEXTURE_SIZE);
+        std::array<int, 2> new_size = scale_image(rightSidedTextures[i].width, rightSidedTextures[i].height, scale);
         rightSidedTextures[i].width = new_size[0];
         rightSidedTextures[i].height = new_size[1];
         leftSidedTextures[i].width = new_size[0];

@@ -7,8 +7,10 @@
 #include "KnightStates.h"
 #include "AttackState.h"
 #include "Direction.h"
+#include "constrains/SimpleConstrain.h"
+#include "Sprite.h"
 
-class Knight
+class Knight : Sprite
 {
 private:
     std::map<KnightStates, State *> states;
@@ -16,9 +18,10 @@ private:
     Vector2 position;
     Direction lookDirection[2];
     Direction walkDirection[2];
+    std::vector<Constrain *> consrains;
     int speed;
 
-    Knight(Vector2 position);
+    Knight(Vector2 position, Vector2 dimension, int max_size);
     void setState(KnightStates name);
     State *getState();
 
