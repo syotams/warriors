@@ -7,31 +7,21 @@ Sprite::Sprite(Vector2 position, Vector2 dimension, int maxSpeed) : position(pos
 
 void Sprite::setWalkDirection(Direction x, Direction y)
 {
+    walkDirection.x = 0;
+    walkDirection.y = 0;
     if (Direction::None != x)
     {
-        walkDirection.x = (float)x;
-        walkDirection.y = 0;
+        walkDirection.x = x == Direction::Right ? 1 : -1;
     }
     if (Direction::None != y)
     {
-        walkDirection.y = (float)y;
-        walkDirection.x = 0;
+        walkDirection.y = y == Direction::Down ? 1 : -1;
     }
 }
 
-void Sprite::moveBy(float x, float y)
+void Sprite::moveBy(Direction x, Direction y)
 {
-    setWalkDirection((Direction)x, (Direction)y);
-    if (x == 0 && y == 0)
-    {
-        speed = 0;
-    }
-    else
-    {
-        speed = maxSpeed;
-    }
-    position.x += (int)walkDirection.x * speed;
-    position.y += (int)walkDirection.y * speed;
+    setWalkDirection(x, y);
 }
 
 void Sprite::moveTo(float x, float y)
@@ -44,9 +34,7 @@ void Sprite::flipDirection()
 {
     walkDirection.x *= -1;
     walkDirection.y *= -1;
-    lookDirection.x *= -1;
-    lookDirection.y *= -1;
-    moveBy(walkDirection.x, walkDirection.y);
+    moveBy((Direction)walkDirection.x, (Direction)walkDirection.y);
 }
 
 Vector2 Sprite::center()
@@ -73,9 +61,4 @@ std::vector<Constrain *> Sprite::getConstrains()
 Vector2 Sprite::getWalkDirection()
 {
     return walkDirection;
-}
-
-Vector2 Sprite::getLookDirection()
-{
-    return lookDirection;
 }

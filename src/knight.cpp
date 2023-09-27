@@ -3,7 +3,6 @@
 Knight::Knight(Vector2 position, Vector2 dimension, int max_size) : Sprite(position, dimension, max_size)
 {
     speed = 0;
-    walkDirection[0] = Direction::None;
     lookDirection[0] = Direction::Right;
 }
 
@@ -20,7 +19,6 @@ Knight *Knight::make(Vector2 position)
 
 void Knight::move()
 {
-    std::array<int, 2> res = {0};
     std::vector<Constrain *> constrains = getConstrains();
     if (constrains.size() > 0)
     {
@@ -30,34 +28,8 @@ void Knight::move()
         }
     }
 
-    int x = 0, y = 0;
-    if (IsKeyDown(KEY_RIGHT))
-    {
-        x = 1;
-        walkDirection[0] = Direction::Right;
-        walkDirection[1] = Direction::None;
-    }
-    else if (IsKeyDown(KEY_LEFT))
-    {
-        x = -1;
-        walkDirection[0] = Direction::Left;
-        walkDirection[1] = Direction::None;
-    }
-    if (IsKeyDown(KEY_UP))
-    {
-        y = -1;
-        walkDirection[1] = Direction::Up;
-        walkDirection[0] = Direction::None;
-    }
-    else if (IsKeyDown(KEY_DOWN))
-    {
-        y = 1;
-        walkDirection[1] = Direction::Down;
-        walkDirection[0] = Direction::None;
-    }
-
-    lookDirection[0] = walkDirection[0] != Direction::None ? walkDirection[0] : lookDirection[0];
-    lookDirection[1] = walkDirection[1] != Direction::None ? walkDirection[1] : lookDirection[1];
+    Vector2 walkDirection = getWalkDirection();
+    setLookDirection(walkDirection);
 
     // Handle attack states (temporary)
     if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))
@@ -65,7 +37,7 @@ void Knight::move()
         setState(KnightStates::Attack);
         speed = 0;
     }
-    else if (x != 0 || y != 0)
+    else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
         setState(KnightStates::Walk);
         speed = KNIGHT_MAX_SPEED;
@@ -76,8 +48,9 @@ void Knight::move()
         speed = 0;
     }
 
-    position.x += (int)walkDirection[0] * speed;
-    position.y += (int)walkDirection[1] * speed;
+    position.x += (int)walkDirection.x * speed;
+    position.y += (int)walkDirection.y * speed;
+
     getState()->move();
 }
 
@@ -102,6 +75,18 @@ void Knight::setState(KnightStates name)
     if (itr != states.end())
     {
         this->currentState = name;
+    }
+}
+
+void Knight::setLookDirection(Vector2 direction)
+{
+    if (direction.x != 0)
+    {
+        lookDirection[0] = direction.x > 0 ? Direction::Right : Direction::Left;
+    }
+    if (direction.y != 0)
+    {
+        lookDirection[1] = direction.y > 0 ? Direction::Down : Direction::Up;
     }
 }
 

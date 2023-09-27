@@ -6,9 +6,8 @@ enum class Direction
 {
     None = 0,
     Right = 1,
-    Left = -1,
-    Up = -1,
-    Down = 1
+    Left = 2,
+    Up = 3,
+    Down = 4
 };
-
 #endif

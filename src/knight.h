@@ -15,15 +15,14 @@ class Knight : Sprite
 private:
     std::map<KnightStates, State *> states;
     KnightStates currentState;
-    Vector2 position;
     Direction lookDirection[2];
-    Direction walkDirection[2];
     std::vector<Constrain *> consrains;
     int speed;
 
     Knight(Vector2 position, Vector2 dimension, int max_size);
     void setState(KnightStates name);
     State *getState();
+    void setLookDirection(Vector2 dir);
 
 public:
     static Knight *make(Vector2 position);
