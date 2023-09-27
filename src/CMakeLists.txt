@@ -12,6 +12,7 @@ add_executable(
     ImageLoader.cpp
     AttackState.cpp
     Sprite.cpp
+    Level.cpp
     constrains/SimpleConstrain.cpp
 )
 
