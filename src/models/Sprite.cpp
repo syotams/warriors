@@ -62,3 +62,12 @@ Vector2 Sprite::getWalkDirection()
 {
     return walkDirection;
 }
+
+Sprite::~Sprite()
+{
+    log("Sprite::~Sprite() destructing constrains");
+    for (auto &constrain : constrains)
+    {
+        delete constrain;
+    }
+}

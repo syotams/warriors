@@ -1,8 +1,12 @@
 #pragma once
 #ifndef STATE_HEADER
 #define STATE_HEADER
+#include <iostream>
 #include "raylib.h"
-#include "Direction.h"
+#include "../Constants.h"
+#include "../helpers/ImageLoader.h"
+#include "../Direction.h"
+#include "../helpers/Log.h"
 
 class State
 {

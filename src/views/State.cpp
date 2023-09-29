@@ -34,4 +34,7 @@ int State::getCurrentFrame()
     return currentFrame;
 }
 
-State::~State() {}
+State::~State()
+{
+    log("State::~State() nothing to destruct");
+}

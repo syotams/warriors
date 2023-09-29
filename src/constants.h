@@ -2,6 +2,9 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
+#include <string>
+
+const std::string LOG_LEVEL = "DEBUG";
 #define TEXTURE_SIZE 96
 #define KNIGHT_MAX_SPEED 2
 #define BACKGROUND_LIGHT_GREEN \

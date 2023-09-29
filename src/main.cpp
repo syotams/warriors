@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "raylib.h"
-#include "Knight.h"
+#include "models/Knight.h"
+#include "models/Level.h"
 #include "Constants.h"
-#include "Level.h"
+#include "models/Game.h"
 
 int SCREEN_WIDTH = 0;
 int SCREEN_HEIGHT = 0;
@@ -20,9 +21,7 @@ int main()
     SetTargetFPS(60); // Set our game to run at 60 frames-per-second
                       //--------------------------------------------------------------------------------------
 
-    Vector2 knightPosition({.x = (float)(SCREEN_WIDTH / 2), .y = (float)(SCREEN_HEIGHT / 2)});
-    Knight *knight = Knight::make(knightPosition);
-    Level *level = Level::make(SCREEN_WIDTH, SCREEN_HEIGHT);
+    Game *game = Game::make(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     int currentFrame = 0;
     int framesCounter = 0;
@@ -31,19 +30,17 @@ int main()
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        level->move();
-        knight->move();
+        game->move();
 
         BeginDrawing();
 
-        level->draw();
-        knight->draw();
+        game->draw();
 
         EndDrawing();
     }
 
     // De-Initialization
-    delete level;
+    delete game;
     // delete knight;
     //--------------------------------------------------------------------------------------
 

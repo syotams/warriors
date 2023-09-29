@@ -4,15 +4,18 @@
 
 #include <iostream>
 #include "raylib.h"
-#include "ImageLoader.h"
-#include "Constants.h"
+#include "../helpers/ImageLoader.h"
+#include "../helpers/Log.h"
+#include "../Constants.h"
 
 class Level
 {
 private:
     int screenWidth, screenHeight;
-    Texture2D backgrounds[7];
-    void loadImages();
+    const int TOTAL_IMAGES = 6;
+    Texture2D backgrounds[6];
+    int positions[6];
+    void loadBackgroundImages();
 
 public:
     Level(int screenWidth, int screenHeight) : screenWidth(screenWidth), screenHeight(screenHeight){};

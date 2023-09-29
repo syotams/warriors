@@ -25,6 +25,7 @@ void IdleState::draw(Vector2 position, Direction *direction)
 
 IdleState::~IdleState()
 {
+    log("IdleState::~IdleState() deconstruct all pointers and images");
     for (int i = 0; i < 10; i++)
     {
         UnloadTexture(textures[i]);

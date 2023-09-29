@@ -92,6 +92,7 @@ void Knight::setLookDirection(Vector2 direction)
 
 Knight::~Knight()
 {
+    log("Knight::~Knight() destructing player states and constrains");
     for (std::map<KnightStates, State *>::iterator itr = states.begin(); itr != states.end(); itr++)
     {
         delete (itr->second);

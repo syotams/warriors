@@ -1,9 +1,10 @@
+#pragma once
+#ifndef WALKSTATE_H_
+#define WALKSTATE_H_
+
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
-#include "Constants.h"
-#include "ImageLoader.h"
-#include "Direction.h"
 
 class WalkState : public State
 {
@@ -17,3 +18,5 @@ public:
     static WalkState *make();
     void draw(Vector2 position, Direction *direction);
 };
+
+#endif // WALKSTATE_H_

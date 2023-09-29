@@ -1,13 +1,18 @@
+#pragma once
+#ifndef KNIGHT_H_
+#define KNIGHT_H_
+
 #include <iostream>
 #include <map>
 #include "raylib.h"
-#include "Constants.h"
-#include "IdleState.h"
-#include "WalkState.h"
-#include "KnightStates.h"
-#include "AttackState.h"
-#include "Direction.h"
-#include "constrains/SimpleConstrain.h"
+#include "../Constants.h"
+#include "../views/IdleState.h"
+#include "../views/WalkState.h"
+#include "../views/KnightStates.h"
+#include "../views/AttackState.h"
+#include "../Direction.h"
+#include "../constrains/SimpleConstrain.h"
+#include "../helpers/Log.h"
 #include "Sprite.h"
 
 class Knight : Sprite
@@ -31,3 +36,5 @@ public:
     void draw();
     ~Knight();
 };
+
+#endif // KNIGHT_H_

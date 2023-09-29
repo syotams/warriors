@@ -28,6 +28,7 @@ void WalkState::draw(Vector2 position, Direction *direction)
 
 WalkState::~WalkState()
 {
+    log("WalkState::~WalkState() deconstruct all pointers and images");
     for (int i = 0; i < 10; i++)
     {
         UnloadTexture(rightSidedTextures[i]);

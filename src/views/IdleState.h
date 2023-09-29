@@ -1,9 +1,10 @@
+#pragma once
+#ifndef IDLESTATE_H_
+#define IDLESTATE_H_
+
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
-#include "Constants.h"
-#include "ImageLoader.h"
-#include "Direction.h"
 
 class IdleState : public State
 {
@@ -18,3 +19,5 @@ public:
     static IdleState *make();
     void draw(Vector2 position, Direction *direction);
 };
+
+#endif // IDLESTATE_H_

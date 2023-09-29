@@ -4,8 +4,9 @@
 
 #include <vector>
 #include "raylib.h"
-#include "constrains/Constrain.h"
-#include "Direction.h"
+#include "../constrains/Constrain.h"
+#include "../Direction.h"
+#include "../helpers/Log.h"
 
 class Sprite
 {
@@ -34,6 +35,7 @@ public:
     void flipDirection();
     Vector2 center();
     Rectangle box();
+    virtual ~Sprite();
 };
 
 #endif

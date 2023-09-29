@@ -25,6 +25,7 @@ void AttackState::draw(Vector2 position, Direction *direction)
 
 AttackState::~AttackState()
 {
+    log("AttackState::~AttackState() deconstruct all pointers and images");
     for (int i = 0; i < 10; i++)
     {
         UnloadTexture(rightSidedTextures[i]);

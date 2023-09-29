@@ -1,9 +1,10 @@
+#pragma once
+#ifndef ATTACKSTATE_H_
+#define ATTACKSTATE_H_
+
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
-#include "Constants.h"
-#include "ImageLoader.h"
-#include "Direction.h"
 
 class AttackState : public State
 {
@@ -17,3 +18,5 @@ public:
     static AttackState *make();
     void draw(Vector2 position, Direction *direction);
 };
+
+#endif // ATTACKSTATE_H_

@@ -5,14 +5,16 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(
     main 
     Main.cpp 
-    Knight.cpp 
-    State.cpp 
-    IdleState.cpp 
-    WalkState.cpp 
-    ImageLoader.cpp
-    AttackState.cpp
-    Sprite.cpp
-    Level.cpp
+    helpers/ImageLoader.cpp
+    helpers/Log.cpp
+    models/Game.cpp
+    models/Sprite.cpp
+    models/Knight.cpp 
+    models/Level.cpp
+    views/State.cpp 
+    views/IdleState.cpp 
+    views/WalkState.cpp 
+    views/AttackState.cpp
     constrains/SimpleConstrain.cpp
 )
 
