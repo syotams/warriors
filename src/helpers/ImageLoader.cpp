@@ -16,7 +16,7 @@ std::array<int, 2> scale_image(const int width, const int height, const int to_s
     return {_width, _height};
 }
 
-std::array<Texture2D *, 2> load_lr_animated_images(const int size, char *file_name, const int scale)
+std::array<Texture2D *, 2> load_lr_animated_images(const int size, const char *file_name, const int scale)
 {
     std::array<Texture2D *, 2> result;
     // TODO: Creating a new instance here is a dedicated to memory leakage, find another solution?

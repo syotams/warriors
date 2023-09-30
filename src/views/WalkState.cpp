@@ -7,7 +7,8 @@ WalkState::WalkState(Texture2D *rightSidedTextures, Texture2D *leftSidedTextures
 
 WalkState *WalkState::make()
 {
-    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, "resources/knight/png/Run (%d).png", TEXTURE_SIZE);
+    char file[] = "resources/knight/png/Run (%d).png";
+    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, file, TEXTURE_SIZE);
     return new WalkState(_textures[0], _textures[1]);
 }
 
