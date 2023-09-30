@@ -5,6 +5,7 @@
 #include <iostream>
 #include <map>
 #include "raylib.h"
+#include "../textures_container.h"
 #include "../Constants.h"
 #include "../views/IdleState.h"
 #include "../views/WalkState.h"
@@ -30,7 +31,7 @@ private:
     void setLookDirection(Vector2 dir);
 
 public:
-    static Knight *make(Vector2 position);
+    static Knight *make(TexturesContainer *container, Vector2 position);
     void addState(KnightStates name, State *state);
     void move();
     void draw();

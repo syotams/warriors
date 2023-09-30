@@ -5,18 +5,18 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
+#include "../textures_container.h"
 
 class IdleState : public State
 {
 private:
-    Texture2D *textures;
-    Texture2D *leftSidedTextures;
+    Texture2D *rTextures;
+    Texture2D *lTextures;
 
 public:
-    // IdleState(){};
-    IdleState(Texture2D *textures, Texture2D *leftSidedTextures);
+    IdleState(Texture2D *rTextures, Texture2D *lTextures);
     ~IdleState();
-    static IdleState *make();
+    static IdleState *make(TexturesContainer *container);
     void draw(Vector2 position, Direction *direction);
 };
 

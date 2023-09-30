@@ -6,10 +6,10 @@ Knight::Knight(Vector2 position, Vector2 dimension, int max_size) : Sprite(posit
     lookDirection[0] = Direction::Right;
 }
 
-Knight *Knight::make(Vector2 position)
+Knight *Knight::make(TexturesContainer *container, Vector2 position)
 {
     Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, 2);
-    knight->addState(KnightStates::Idle, IdleState::make());
+    knight->addState(KnightStates::Idle, IdleState::make(container));
     knight->addState(KnightStates::Walk, WalkState::make());
     knight->addState(KnightStates::Attack, AttackState::make());
     knight->setState(KnightStates::Idle);

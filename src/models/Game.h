@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "Knight.h"
 #include "Level.h"
+#include "../textures_container.h"
 #include "../helpers/Log.h"
 
 class Game
@@ -14,11 +15,15 @@ private:
     int screenHeight;
     Knight *player;
     Level *level;
+    TexturesContainer container;
+
+    void loadTextures();
 
 public:
     Game(int screenWidth, int screenHeight);
     ~Game();
     static Game *make(int screenWidth, int screenHeight);
+    Knight *createPlayer();
     void move();
     void draw();
     void setLevel(Level *level);

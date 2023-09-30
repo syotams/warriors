@@ -4,7 +4,8 @@ set(CMAKE_CXX_STANDARD 17)
 # Build main.c on PROJECT_NAME, I could call it wahtever I wanted
 add_executable(
     main 
-    Main.cpp 
+    main.cpp 
+    textures_container.cpp
     helpers/ImageLoader.cpp
     helpers/Log.cpp
     models/Game.cpp
