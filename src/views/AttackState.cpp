@@ -1,37 +1,32 @@
 #include "AttackState.h"
 
-AttackState::AttackState(Texture2D *rightSidedTextures, Texture2D *leftSidedTextures) : State(0, 10), rightSidedTextures(rightSidedTextures), leftSidedTextures(leftSidedTextures)
+AttackState::AttackState(Texture2D *rTextures, Texture2D *lTextures) : State(0, 10), rTextures(rTextures), lTextures(lTextures)
 {
     setFramesPerSecond(16);
 }
 
-AttackState *AttackState::make()
+AttackState *AttackState::make(TexturesContainer *container)
 {
-    char file[] = "resources/knight/png/Attack (%d).png";
-    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, file, TEXTURE_SIZE);
-    return new AttackState(_textures[0], _textures[1]);
+    Texture2D *rTextures = textures_container_get_textures(container, TexturesNames::Knight_Attack_Right);
+    Texture2D *lTextures = textures_container_get_textures(container, TexturesNames::Knight_Attack_Left);
+    return new AttackState(rTextures, lTextures);
 }
 
 void AttackState::draw(Vector2 position, Direction *direction)
 {
     if (Direction::Right == direction[0])
     {
-        DrawTexture(rightSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
+        DrawTexture(rTextures[getCurrentFrame()], position.x, position.y, WHITE);
     }
     else if (Direction::Left == direction[0])
     {
-        DrawTexture(leftSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
+        DrawTexture(lTextures[getCurrentFrame()], position.x, position.y, WHITE);
     }
 }
 
 AttackState::~AttackState()
 {
-    log("AttackState::~AttackState() deconstruct all pointers and images");
-    for (int i = 0; i < 10; i++)
-    {
-        UnloadTexture(rightSidedTextures[i]);
-        UnloadTexture(leftSidedTextures[i]);
-    }
-    delete[] rightSidedTextures;
-    delete[] leftSidedTextures;
+    log("AttackState::~AttackState() deconstruct all pointers array");
+    delete[] rTextures;
+    delete[] lTextures;
 }

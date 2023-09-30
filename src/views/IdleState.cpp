@@ -26,5 +26,7 @@ void IdleState::draw(Vector2 position, Direction *direction)
 
 IdleState::~IdleState()
 {
-    log("IdleState::~IdleState() nothing to delete");
+    log("IdleState::~IdleState() destruct pointers array");
+    delete[] rTextures;
+    delete[] lTextures;
 }

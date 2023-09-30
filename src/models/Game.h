@@ -18,6 +18,7 @@ private:
     TexturesContainer container;
 
     void loadTextures();
+    void nextLevel();
 
 public:
     Game(int screenWidth, int screenHeight);

@@ -1,15 +1,15 @@
 #include "WalkState.h"
 
-WalkState::WalkState(Texture2D *rightSidedTextures, Texture2D *leftSidedTextures) : State(0, 10), rightSidedTextures(rightSidedTextures), leftSidedTextures(leftSidedTextures)
+WalkState::WalkState(Texture2D *rTextures, Texture2D *lTextures) : State(0, 10), rTextures(rTextures), lTextures(lTextures)
 {
     setFramesPerSecond(16);
 }
 
-WalkState *WalkState::make()
+WalkState *WalkState::make(TexturesContainer *container)
 {
-    char file[] = "resources/knight/png/Run (%d).png";
-    std::array<Texture2D *, 2> _textures = load_lr_animated_images(10, file, TEXTURE_SIZE);
-    return new WalkState(_textures[0], _textures[1]);
+    Texture2D *rTextures = textures_container_get_textures(container, TexturesNames::Knight_Run_Right);
+    Texture2D *lTextures = textures_container_get_textures(container, TexturesNames::Knight_Run_Left);
+    return new WalkState(rTextures, lTextures);
 }
 
 void WalkState::draw(Vector2 position, Direction *direction)
@@ -18,23 +18,18 @@ void WalkState::draw(Vector2 position, Direction *direction)
     {
     case Direction::Right:
     default:
-        DrawTexture(rightSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
+        DrawTexture(rTextures[getCurrentFrame()], position.x, position.y, WHITE);
         break;
 
     case Direction::Left:
-        DrawTexture(leftSidedTextures[getCurrentFrame()], position.x, position.y, WHITE);
+        DrawTexture(lTextures[getCurrentFrame()], position.x, position.y, WHITE);
         break;
     }
 }
 
 WalkState::~WalkState()
 {
-    log("WalkState::~WalkState() deconstruct all pointers and images");
-    for (int i = 0; i < 10; i++)
-    {
-        UnloadTexture(rightSidedTextures[i]);
-        UnloadTexture(leftSidedTextures[i]);
-    }
-    delete[] rightSidedTextures;
-    delete[] leftSidedTextures;
+    log("WalkState::~WalkState() destruct all pointers array");
+    delete[] rTextures;
+    delete[] lTextures;
 }

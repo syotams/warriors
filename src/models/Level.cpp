@@ -15,10 +15,13 @@ void Level::loadBackgroundImages()
     }
 }
 
-Level *Level::make(int screenWidth, int screenHeight)
+Level *Level::make(TexturesContainer *container, int screenWidth, int screenHeight)
 {
     Level *level = new Level(screenWidth, screenHeight);
     level->loadBackgroundImages();
+    // Vector2 knightPosition({.x = (float)(screenWidth / 2), .y = (float)(screenHeight / 2)});
+    // level->cpuPlayer = Knight::make(container, knightPosition);
+    // level->cpuPlayer->addConstrain(new );
     return level;
 }
 
@@ -32,6 +35,7 @@ void Level::move()
             positions[i] = 0;
         }
     }
+    // cpuPlayer->move();
 }
 
 void Level::draw()
@@ -43,6 +47,7 @@ void Level::draw()
     DrawTexture(backgrounds[2], positions[2], backgrounds[2].height, WHITE);
     DrawTexture(backgrounds[1], positions[1], screenHeight - backgrounds[1].height, WHITE);
     DrawTexture(backgrounds[0], positions[0], screenHeight - backgrounds[0].height, WHITE);
+    // cpuPlayer->draw();
 }
 
 Level::~Level()
@@ -52,4 +57,5 @@ Level::~Level()
     {
         UnloadTexture(background);
     }
+    // delete cpuPlayer;
 }

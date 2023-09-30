@@ -5,17 +5,18 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
+#include "../textures_container.h"
 
 class AttackState : public State
 {
 private:
-    Texture2D *rightSidedTextures;
-    Texture2D *leftSidedTextures;
+    Texture2D *rTextures;
+    Texture2D *lTextures;
 
 public:
-    AttackState(Texture2D *rightSidedTextures, Texture2D *leftSideTextures);
+    AttackState(Texture2D *rTextures, Texture2D *leftSideTextures);
     ~AttackState();
-    static AttackState *make();
+    static AttackState *make(TexturesContainer *container);
     void draw(Vector2 position, Direction *direction);
 };
 

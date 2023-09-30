@@ -10,8 +10,8 @@ Knight *Knight::make(TexturesContainer *container, Vector2 position)
 {
     Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, 2);
     knight->addState(KnightStates::Idle, IdleState::make(container));
-    knight->addState(KnightStates::Walk, WalkState::make());
-    knight->addState(KnightStates::Attack, AttackState::make());
+    knight->addState(KnightStates::Walk, WalkState::make(container));
+    knight->addState(KnightStates::Attack, AttackState::make(container));
     knight->setState(KnightStates::Idle);
     knight->addConstrain(new SimpleConstrain(knight));
     return knight;
