@@ -16,7 +16,7 @@
 #include "../helpers/Log.h"
 #include "Sprite.h"
 
-class Knight : Sprite
+class Knight : public Sprite
 {
 private:
     std::map<KnightStates, State *> states;

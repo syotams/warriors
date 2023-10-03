@@ -27,6 +27,4 @@ void AttackState::draw(Vector2 position, Direction *direction)
 AttackState::~AttackState()
 {
     log("AttackState::~AttackState() deconstruct all pointers array");
-    delete[] rTextures;
-    delete[] lTextures;
 }

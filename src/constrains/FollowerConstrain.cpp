@@ -1,8 +1,8 @@
-#include "follower_constrain.h"
+#include "FollowerConstrain.h"
 
 FollowerConstrain::~FollowerConstrain()
 {
-    std::cout << "*** in FollowerConstrain::~FollowerConstrain" << std::endl;
+    std::cout << "*** in FollowerConstrain::~FollowerConstrain\n";
 }
 
 void FollowerConstrain::apply()
@@ -29,55 +29,56 @@ void FollowerConstrain::apply()
         y = y > 0 ? 1 : -1;
     }
 
-    Vector2 direction = chaser->getDirection();
+    Vector2 direction = chaser->getWalkDirection();
+    Direction go[2];
 
     if (x > 0)
     {
         if (int(position.y) % grid_size > 0.0f)
         {
-            y = direction.y;
-            x = 0;
+            go[1] = direction.y > 0 ? Direction::Down : Direction::Up;
+            go[0] = Direction::None;
         }
         else
         {
-            x = 1;
+            go[0] = Direction::Right;
         }
     }
     else if (x < 0)
     {
         if (int(position.y) % grid_size > 0.0f)
         {
-            y = direction.y;
-            x = 0;
+            go[1] = direction.y > 0 ? Direction::Down : Direction::Up;
+            go[0] = Direction::None;
         }
         else
         {
-            x = -1;
+            go[0] = Direction::Left;
         }
     }
     else if (y < 0)
     {
         if (int(position.x) % grid_size > 0.0f)
         {
-            x = direction.x;
-            y = 0;
+            go[0] = direction.x > 0 ? Direction::Right : Direction::Left;
+            go[1] = Direction::None;
         }
         else
         {
-            y = -1;
+            go[1] = Direction::Up;
         }
     }
     else if (y > 0)
     {
         if (int(position.x) % grid_size > 0.0f)
         {
-            x = direction.x;
-            y = 0;
+            go[0] = direction.x > 0 ? Direction::Right : Direction::Left;
+            go[1] = Direction::None;
         }
         else
         {
-            y = 1;
+            go[1] = Direction::Down;
         }
     }
-    chaser->moveBy(x, y);
+    chaser->moveBy(go[0], go[1]);
 }

@@ -30,6 +30,4 @@ void WalkState::draw(Vector2 position, Direction *direction)
 WalkState::~WalkState()
 {
     log("WalkState::~WalkState() destruct all pointers array");
-    delete[] rTextures;
-    delete[] lTextures;
 }

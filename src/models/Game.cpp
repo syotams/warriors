@@ -30,28 +30,32 @@ Game::Game(int screenWidth, int screenHeight) : screenWidth(screenWidth), screen
 Game *Game::make(int screenWidth, int screenHeight)
 {
     Game *game = new Game(screenWidth, screenHeight);
-    game->nextLevel();
     game->loadTextures();
+    game->nextLevel();
     game->player = game->createPlayer();
+    game->level->addConstrainOn(game->player);
     return game;
 }
 
 Knight *Game::createPlayer()
 {
     Vector2 knightPosition({.x = (float)(screenWidth / 2), .y = (float)(screenHeight / 2)});
-    return Knight::make(&container, knightPosition);
+    Knight *knight = Knight::make(&container, knightPosition);
+    knight->addConstrain(new SimpleConstrain(knight));
+    return knight;
 }
 
 void Game::move()
 {
-    level->move();
     player->move();
+    level->move();
 }
 
 void Game::draw()
 {
     level->draw();
     player->draw();
+    // DrawText("Hello World", 20, 20, 20, BLACK);
 }
 
 void Game::setLevel(Level *level)

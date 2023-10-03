@@ -2,7 +2,7 @@
 
 Sprite::Sprite(Vector2 position, Vector2 dimension, int maxSpeed) : position(position), dimension(dimension), maxSpeed(maxSpeed), speed(maxSpeed)
 {
-    setWalkDirection(Direction::None, Direction::Right);
+    setWalkDirection(Direction::None, Direction::None);
 };
 
 void Sprite::setWalkDirection(Direction x, Direction y)
@@ -35,6 +35,11 @@ void Sprite::flipDirection()
     walkDirection.x *= -1;
     walkDirection.y *= -1;
     moveBy((Direction)walkDirection.x, (Direction)walkDirection.y);
+}
+
+Vector2 Sprite::getPosition()
+{
+    return position;
 }
 
 Vector2 Sprite::center()

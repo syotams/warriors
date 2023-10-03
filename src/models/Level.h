@@ -9,6 +9,7 @@
 #include "../Constants.h"
 #include "../models/Knight.h"
 #include "../textures_container.h"
+#include "../constrains/FollowerConstrain.h"
 
 class Level
 {
@@ -25,6 +26,7 @@ public:
     Level(int screenWidth, int screenHeight) : screenWidth(screenWidth), screenHeight(screenHeight){};
     ~Level();
     static Level *make(TexturesContainer *container, int screenWidth, int screenHeight);
+    void addConstrainOn(Sprite *sprite);
     void move();
     void draw();
 };

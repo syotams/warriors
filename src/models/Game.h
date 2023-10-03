@@ -19,12 +19,12 @@ private:
 
     void loadTextures();
     void nextLevel();
+    Knight *createPlayer();
 
 public:
     Game(int screenWidth, int screenHeight);
     ~Game();
     static Game *make(int screenWidth, int screenHeight);
-    Knight *createPlayer();
     void move();
     void draw();
     void setLevel(Level *level);

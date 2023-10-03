@@ -33,6 +33,7 @@ public:
     Vector2 getWalkDirection();
     void moveTo(float x, float y);
     void flipDirection();
+    Vector2 getPosition();
     Vector2 center();
     Rectangle box();
     virtual ~Sprite();

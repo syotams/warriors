@@ -13,7 +13,6 @@ Knight *Knight::make(TexturesContainer *container, Vector2 position)
     knight->addState(KnightStates::Walk, WalkState::make(container));
     knight->addState(KnightStates::Attack, AttackState::make(container));
     knight->setState(KnightStates::Idle);
-    knight->addConstrain(new SimpleConstrain(knight));
     return knight;
 }
 

@@ -1,11 +1,11 @@
 #pragma once
-#ifndef DOG_CHASE_GRID_HEADER
-#define DOG_CHASE_GRID_HEADER
+#ifndef FOLLOWERCONSTRAIN_H_
+#define FOLLOWERCONSTRAIN_H_
 
 #include <iostream>
 #include <cmath>
-#include "../sprite.h"
-#include "constrain.h"
+#include "../models/Sprite.h"
+#include "Constrain.h"
 
 class FollowerConstrain : public Constrain
 {
@@ -18,4 +18,5 @@ public:
     virtual ~FollowerConstrain();
     void apply();
 };
+
 #endif
