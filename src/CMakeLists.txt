@@ -18,6 +18,7 @@ add_executable(
     views/AttackState.cpp
     constrains/FollowerConstrain.cpp
     constrains/SimpleConstrain.cpp
+    constrains/ScreenConstrain.cpp
 )
 
 target_link_libraries(warriors raylib)

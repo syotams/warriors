@@ -7,11 +7,11 @@ FollowerConstrain::~FollowerConstrain()
 
 void FollowerConstrain::apply()
 {
-    Vector2 position = chaser->getPosition();
+    Vector2 chaserPosition = chaser->getPosition();
     Vector2 chasedPosition = chased->getPosition();
 
-    float yDiff = chasedPosition.y - position.y;
-    float xDiff = chasedPosition.x - position.x;
+    float yDiff = chasedPosition.y - chaserPosition.y;
+    float xDiff = chasedPosition.x - chaserPosition.x;
 
     double distance = sqrt(yDiff * yDiff + xDiff * xDiff);
 
@@ -30,55 +30,54 @@ void FollowerConstrain::apply()
     }
 
     Vector2 direction = chaser->getWalkDirection();
-    Direction go[2];
 
     if (x > 0)
     {
-        if (int(position.y) % grid_size > 0.0f)
+        if (int(chaserPosition.y) % grid_size > 0.0f)
         {
-            go[1] = direction.y > 0 ? Direction::Down : Direction::Up;
-            go[0] = Direction::None;
+            y = direction.y;
+            x = 0;
         }
         else
         {
-            go[0] = Direction::Right;
+            x = 1;
         }
     }
     else if (x < 0)
     {
-        if (int(position.y) % grid_size > 0.0f)
+        if (int(chaserPosition.y) % grid_size > 0.0f)
         {
-            go[1] = direction.y > 0 ? Direction::Down : Direction::Up;
-            go[0] = Direction::None;
+            y = direction.y;
+            x = 0;
         }
         else
         {
-            go[0] = Direction::Left;
+            x = -1;
         }
     }
     else if (y < 0)
     {
-        if (int(position.x) % grid_size > 0.0f)
+        if (int(chaserPosition.x) % grid_size > 0.0f)
         {
-            go[0] = direction.x > 0 ? Direction::Right : Direction::Left;
-            go[1] = Direction::None;
+            x = direction.x;
+            y = 0;
         }
         else
         {
-            go[1] = Direction::Up;
+            y = -1;
         }
     }
     else if (y > 0)
     {
-        if (int(position.x) % grid_size > 0.0f)
+        if (int(chaserPosition.x) % grid_size > 0.0f)
         {
-            go[0] = direction.x > 0 ? Direction::Right : Direction::Left;
-            go[1] = Direction::None;
+            x = direction.x;
+            y = 0;
         }
         else
         {
-            go[1] = Direction::Down;
+            y = 1;
         }
     }
-    chaser->moveBy(go[0], go[1]);
+    chaser->moveBy(x, y);
 }

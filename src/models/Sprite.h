@@ -25,6 +25,7 @@ protected:
 
 public:
     virtual void moveBy(Direction x, Direction y);
+    virtual void moveBy(float x, float y);
     virtual void draw() = 0;
     virtual void move() = 0;
 

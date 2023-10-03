@@ -19,6 +19,12 @@ void Sprite::setWalkDirection(Direction x, Direction y)
     }
 }
 
+void Sprite::moveBy(float x, float y)
+{
+    walkDirection.x = x;
+    walkDirection.y = y;
+}
+
 void Sprite::moveBy(Direction x, Direction y)
 {
     setWalkDirection(x, y);
@@ -34,7 +40,7 @@ void Sprite::flipDirection()
 {
     walkDirection.x *= -1;
     walkDirection.y *= -1;
-    moveBy((Direction)walkDirection.x, (Direction)walkDirection.y);
+    moveBy(walkDirection.x, walkDirection.y);
 }
 
 Vector2 Sprite::getPosition()
