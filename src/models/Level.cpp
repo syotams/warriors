@@ -21,12 +21,13 @@ Level *Level::make(TexturesContainer *container, int screenWidth, int screenHeig
     level->loadBackgroundImages();
     Vector2 knightPosition({.x = (float)(screenWidth / 2) + 200, .y = (float)(screenHeight / 2)});
     level->cpuPlayer = Knight::make(container, knightPosition);
+    level->cpuPlayer->setMaxSpeed(KNIGHT_MAX_SPEED / 2);
     return level;
 }
 
 void Level::addConstrainOn(Sprite *sprite)
 {
-    cpuPlayer->addConstrain(new FollowerConstrain(cpuPlayer, sprite, 0));
+    cpuPlayer->addConstrain(new FollowerConstrain(cpuPlayer, sprite, 1));
 }
 
 void Level::move()

@@ -22,17 +22,16 @@ private:
     std::map<KnightStates, State *> states;
     KnightStates currentState;
     Direction lookDirection[2];
-    std::vector<Constrain *> consrains;
-    int speed;
 
-    Knight(Vector2 position, Vector2 dimension, int max_size);
-    void setState(KnightStates name);
-    State *getState();
+    Knight(Vector2 position, Vector2 dimension, int maxSpeed);
     void setLookDirection(Vector2 dir);
 
 public:
     static Knight *make(TexturesContainer *container, Vector2 position);
+    State *getState();
     void addState(KnightStates name, State *state);
+    void setState(KnightStates name);
+    KnightStates getKnightState();
     void move();
     void draw();
     ~Knight();

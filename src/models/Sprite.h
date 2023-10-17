@@ -16,6 +16,7 @@ private:
     int maxSpeed;
     int speed;
     std::vector<Constrain *> constrains;
+    std::vector<Constrain *> abilities;
 
     void setWalkDirection(Direction x, Direction y);
 
@@ -29,14 +30,21 @@ public:
     virtual void draw() = 0;
     virtual void move() = 0;
 
-    void addConstrain(Constrain *constrain);
-    std::vector<Constrain *> getConstrains();
-    Vector2 getWalkDirection();
     void moveTo(float x, float y);
     void flipDirection();
+
+    void addConstrain(Constrain *constrain);
+    std::vector<Constrain *> getConstrains();
+    std::vector<Constrain *> getAbilities();
+    Vector2 getWalkDirection();
     Vector2 getPosition();
     Vector2 center();
     Rectangle box();
+    void setSpeed(int speed);
+    int getSpeed();
+    void setMaxSpeed(int speed);
+    int getMaxSpeed();
+
     virtual ~Sprite();
 };
 

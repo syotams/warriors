@@ -3,7 +3,7 @@
 Sprite::Sprite(Vector2 position, Vector2 dimension, int maxSpeed) : position(position), dimension(dimension), maxSpeed(maxSpeed), speed(maxSpeed)
 {
     setWalkDirection(Direction::None, Direction::None);
-};
+}
 
 void Sprite::setWalkDirection(Direction x, Direction y)
 {
@@ -69,9 +69,40 @@ std::vector<Constrain *> Sprite::getConstrains()
     return constrains;
 }
 
+std::vector<Constrain *> Sprite::getAbilities()
+{
+    return abilities;
+}
+
 Vector2 Sprite::getWalkDirection()
 {
     return walkDirection;
+}
+
+void Sprite::setSpeed(int speed)
+{
+    if (speed >= 0)
+    {
+        this->speed = speed;
+    }
+}
+
+int Sprite::getSpeed()
+{
+    return speed;
+}
+
+void Sprite::setMaxSpeed(int speed)
+{
+    if (speed >= 0)
+    {
+        this->maxSpeed = speed;
+    }
+}
+
+int Sprite::getMaxSpeed()
+{
+    return maxSpeed;
 }
 
 Sprite::~Sprite()

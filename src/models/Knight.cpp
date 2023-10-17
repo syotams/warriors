@@ -1,14 +1,14 @@
 #include "Knight.h"
 
-Knight::Knight(Vector2 position, Vector2 dimension, int max_size) : Sprite(position, dimension, max_size)
+Knight::Knight(Vector2 position, Vector2 dimension, int maxSpeed) : Sprite(position, dimension, maxSpeed)
 {
-    speed = 0;
+    setSpeed(0);
     lookDirection[0] = Direction::Right;
 }
 
 Knight *Knight::make(TexturesContainer *container, Vector2 position)
 {
-    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, 2);
+    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
     knight->addState(KnightStates::Idle, IdleState::make(container));
     knight->addState(KnightStates::Walk, WalkState::make(container));
     knight->addState(KnightStates::Attack, AttackState::make(container));
@@ -34,19 +34,20 @@ void Knight::move()
     if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))
     {
         setState(KnightStates::Attack);
-        speed = 0;
+        setSpeed(0);
     }
     else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
         setState(KnightStates::Walk);
-        speed = KNIGHT_MAX_SPEED;
+        setSpeed(getMaxSpeed());
     }
     else
     {
         setState(KnightStates::Idle);
-        speed = 0;
+        setSpeed(0);
     }
 
+    int speed = getSpeed();
     position.x += (int)walkDirection.x * speed;
     position.y += (int)walkDirection.y * speed;
 
@@ -75,6 +76,11 @@ void Knight::setState(KnightStates name)
     {
         this->currentState = name;
     }
+}
+
+KnightStates Knight::getKnightState()
+{
+    return currentState;
 }
 
 void Knight::setLookDirection(Vector2 direction)
