@@ -16,7 +16,7 @@ private:
 
 public:
     ScreenConstrain(Sprite *element, int screenWidth, int screenHeight) : element(element), screenWidth(screenWidth), screenHeight(screenHeight){};
-    void apply();
+    void apply() override;
 };
 
 #endif

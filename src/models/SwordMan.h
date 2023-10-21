@@ -33,9 +33,8 @@ public:
     static SwordMan *make(TexturesContainer *container, Vector2 position);
     State *getState();
     void addState(WarriorStates name, State *state);
-    WarriorStates getKnightState();
-    virtual void move();
-    void draw();
+    void move() override;
+    void draw() override;
     void attack();
     void walk();
     void idle();

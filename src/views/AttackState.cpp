@@ -14,6 +14,7 @@ AttackState *AttackState::make(TexturesContainer *container)
 
 void AttackState::draw(Vector2 position, Direction *direction)
 {
+    State::draw(position, direction);
     if (Direction::Right == direction[0])
     {
         DrawTexture(rTextures[getCurrentFrame()], position.x, position.y, WHITE);

@@ -16,7 +16,7 @@ class GridChaseConstrain : public Constrain
 public:
     GridChaseConstrain(Sprite *chaser, Sprite *chased, int grid_size) : chaser(chaser), chased(chased), grid_size(grid_size){};
     virtual ~GridChaseConstrain();
-    void apply();
+    void apply() override;
 };
 
 #endif

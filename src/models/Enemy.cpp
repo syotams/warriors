@@ -1,11 +1,5 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 position, Vector2 dimension, int maxSpeed) : SwordMan(position, dimension, maxSpeed)
-{
-    setSpeed(0);
-    lookDirection[0] = Direction::Right;
-}
-
 Enemy *Enemy::make(TexturesContainer *container, Vector2 position)
 {
     Enemy *swordMan = new Enemy(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
@@ -47,8 +41,6 @@ void Enemy::move()
     int speed = getSpeed();
     position.x += walkDirection.x * speed;
     position.y += walkDirection.y * speed;
-
-    getState()->move();
 }
 
 Enemy::~Enemy()

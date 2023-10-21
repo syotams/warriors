@@ -14,6 +14,7 @@ WalkState *WalkState::make(TexturesContainer *container)
 
 void WalkState::draw(Vector2 position, Direction *direction)
 {
+    State::draw(position, direction);
     switch (direction[0])
     {
     case Direction::Right:

@@ -2,7 +2,7 @@
 
 State::State(int currentFrame, int framesCounter) : currentFrame(currentFrame), framesCounter(framesCounter) {}
 
-void State::move()
+void State::draw(Vector2 position, Direction *direction)
 {
     if (framesCounter++ >= 60 / framesPerSecond)
     {

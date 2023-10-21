@@ -17,7 +17,7 @@ public:
     AttackState(Texture2D *rTextures, Texture2D *leftSideTextures);
     ~AttackState();
     static AttackState *make(TexturesContainer *container);
-    void draw(Vector2 position, Direction *direction);
+    void draw(Vector2 position, Direction *direction) override;
 };
 
 #endif // ATTACKSTATE_H_

@@ -15,6 +15,6 @@ class DogChaseConstrain : public Constrain
 public:
     DogChaseConstrain(Sprite *chaser, Sprite *chased) : chaser(chaser), chased(chased){};
     ~DogChaseConstrain();
-    void apply();
+    void apply() override;
 };
 #endif

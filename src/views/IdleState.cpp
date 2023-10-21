@@ -14,6 +14,7 @@ IdleState *IdleState::make(TexturesContainer *container)
 
 void IdleState::draw(Vector2 position, Direction *direction)
 {
+    State::draw(position, direction);
     if (Direction::Right == direction[0])
     {
         DrawTextureRec(rTextures[getCurrentFrame()], {.x = 5, .y = 0, .width = 66, .height = 96}, position, WHITE);

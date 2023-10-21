@@ -17,7 +17,7 @@ public:
     WalkState(Texture2D *rTextures, Texture2D *lTextures);
     ~WalkState();
     static WalkState *make(TexturesContainer *contianer);
-    void draw(Vector2 position, Direction *direction);
+    void draw(Vector2 position, Direction *direction) override;
 };
 
 #endif // WALKSTATE_H_

@@ -37,8 +37,7 @@ void SwordMan::move()
     }
     else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
-        setState(WarriorStates::Walk);
-        setSpeed(getMaxSpeed());
+        walk();
     }
     else
     {
@@ -48,8 +47,6 @@ void SwordMan::move()
     int speed = getSpeed();
     position.x += (int)walkDirection.x * speed;
     position.y += (int)walkDirection.y * speed;
-
-    getState()->move();
 }
 
 void SwordMan::attack()
@@ -106,11 +103,6 @@ void SwordMan::setState(WarriorStates name)
     {
         this->currentState = name;
     }
-}
-
-WarriorStates SwordMan::getKnightState()
-{
-    return currentState;
 }
 
 void SwordMan::setLookDirection(Vector2 direction)

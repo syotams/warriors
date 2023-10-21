@@ -13,6 +13,6 @@ class SimpleConstrain : public Constrain
 public:
     SimpleConstrain(Sprite *player) : player(player){};
     ~SimpleConstrain();
-    void apply();
+    void apply() override;
 };
 #endif

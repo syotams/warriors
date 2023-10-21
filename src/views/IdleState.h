@@ -17,7 +17,7 @@ public:
     IdleState(Texture2D *rTextures, Texture2D *lTextures);
     ~IdleState();
     static IdleState *make(TexturesContainer *container);
-    void draw(Vector2 position, Direction *direction);
+    void draw(Vector2 position, Direction *direction) override;
 };
 
 #endif // IDLESTATE_H_
