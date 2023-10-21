@@ -1,19 +1,18 @@
 #include "Knight.h"
 
-Knight::Knight(Vector2 position, Vector2 dimension, int max_size) : Sprite(position, dimension, max_size)
+Knight::Knight(Vector2 position, Vector2 dimension, int maxSpeed) : Sprite(position, dimension, maxSpeed)
 {
-    speed = 0;
+    setSpeed(0);
     lookDirection[0] = Direction::Right;
 }
 
-Knight *Knight::make(Vector2 position)
+Knight *Knight::make(TexturesContainer *container, Vector2 position)
 {
-    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, 2);
-    knight->addState(KnightStates::Idle, IdleState::make());
-    knight->addState(KnightStates::Walk, WalkState::make());
-    knight->addState(KnightStates::Attack, AttackState::make());
+    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
+    knight->addState(KnightStates::Idle, IdleState::make(container));
+    knight->addState(KnightStates::Walk, WalkState::make(container));
+    knight->addState(KnightStates::Attack, AttackState::make(container));
     knight->setState(KnightStates::Idle);
-    knight->addConstrain(new SimpleConstrain(knight));
     return knight;
 }
 
@@ -32,31 +31,44 @@ void Knight::move()
     setLookDirection(walkDirection);
 
     // Handle attack states (temporary)
-    if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))
+    if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && !getState()->isCompleted()))
     {
-        setState(KnightStates::Attack);
-        speed = 0;
+        attack();
     }
     else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
         setState(KnightStates::Walk);
-        speed = KNIGHT_MAX_SPEED;
+        setSpeed(getMaxSpeed());
     }
     else
     {
-        setState(KnightStates::Idle);
-        speed = 0;
+        idle();
     }
 
+    int speed = getSpeed();
     position.x += (int)walkDirection.x * speed;
     position.y += (int)walkDirection.y * speed;
 
     getState()->move();
 }
 
+void Knight::attack()
+{
+    setState(KnightStates::Attack);
+    setSpeed(0);
+}
+
+void Knight::idle()
+{
+    setState(KnightStates::Idle);
+    setSpeed(0);
+}
+
 void Knight::draw()
 {
     getState()->draw(position, lookDirection);
+    Rectangle rect = rectacngle();
+    DrawRectangleLines(position.x, position.y, rect.width, rect.height, BLACK);
 }
 
 void Knight::addState(KnightStates name, State *state)
@@ -76,6 +88,11 @@ void Knight::setState(KnightStates name)
     {
         this->currentState = name;
     }
+}
+
+KnightStates Knight::getKnightState()
+{
+    return currentState;
 }
 
 void Knight::setLookDirection(Vector2 direction)

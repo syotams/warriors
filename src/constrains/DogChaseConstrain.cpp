@@ -1,4 +1,4 @@
-#include "dog_chase_constrain.h"
+#include "DogChaseConstrain.h"
 
 DogChaseConstrain::~DogChaseConstrain()
 {
@@ -14,8 +14,12 @@ void DogChaseConstrain::apply()
 
     double distance = sqrt(yDiff * yDiff + xDiff * xDiff);
 
-    if (distance > 0)
+    if (distance > 0.1)
     {
         chaser->moveBy(xDiff / distance, yDiff / distance);
+    }
+    else
+    {
+        chaser->moveBy(0, 0);
     }
 }

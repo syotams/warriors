@@ -1,17 +1,17 @@
-#include "follower_constrain.h"
+#include "GridChaseConstrain.h"
 
-FollowerConstrain::~FollowerConstrain()
+GridChaseConstrain::~GridChaseConstrain()
 {
-    std::cout << "*** in FollowerConstrain::~FollowerConstrain" << std::endl;
+    std::cout << "*** in GridChaseConstrain::~GridChaseConstrain\n";
 }
 
-void FollowerConstrain::apply()
+void GridChaseConstrain::apply()
 {
-    Vector2 position = chaser->getPosition();
+    Vector2 chaserPosition = chaser->getPosition();
     Vector2 chasedPosition = chased->getPosition();
 
-    float yDiff = chasedPosition.y - position.y;
-    float xDiff = chasedPosition.x - position.x;
+    float yDiff = chasedPosition.y - chaserPosition.y;
+    float xDiff = chasedPosition.x - chaserPosition.x;
 
     double distance = sqrt(yDiff * yDiff + xDiff * xDiff);
 
@@ -29,11 +29,11 @@ void FollowerConstrain::apply()
         y = y > 0 ? 1 : -1;
     }
 
-    Vector2 direction = chaser->getDirection();
+    Vector2 direction = chaser->getWalkDirection();
 
     if (x > 0)
     {
-        if (int(position.y) % grid_size > 0.0f)
+        if (int(chaserPosition.y) % grid_size > 0.0f)
         {
             y = direction.y;
             x = 0;
@@ -45,7 +45,7 @@ void FollowerConstrain::apply()
     }
     else if (x < 0)
     {
-        if (int(position.y) % grid_size > 0.0f)
+        if (int(chaserPosition.y) % grid_size > 0.0f)
         {
             y = direction.y;
             x = 0;
@@ -57,7 +57,7 @@ void FollowerConstrain::apply()
     }
     else if (y < 0)
     {
-        if (int(position.x) % grid_size > 0.0f)
+        if (int(chaserPosition.x) % grid_size > 0.0f)
         {
             x = direction.x;
             y = 0;
@@ -69,7 +69,7 @@ void FollowerConstrain::apply()
     }
     else if (y > 0)
     {
-        if (int(position.x) % grid_size > 0.0f)
+        if (int(chaserPosition.x) % grid_size > 0.0f)
         {
             x = direction.x;
             y = 0;

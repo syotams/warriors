@@ -5,17 +5,18 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "State.h"
+#include "../textures_container.h"
 
 class WalkState : public State
 {
 private:
-    Texture2D *rightSidedTextures;
-    Texture2D *leftSidedTextures;
+    Texture2D *rTextures;
+    Texture2D *lTextures;
 
 public:
-    WalkState(Texture2D *rightSidedTextures, Texture2D *leftSideTextures);
+    WalkState(Texture2D *rTextures, Texture2D *lTextures);
     ~WalkState();
-    static WalkState *make();
+    static WalkState *make(TexturesContainer *contianer);
     void draw(Vector2 position, Direction *direction);
 };
 

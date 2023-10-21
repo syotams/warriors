@@ -15,11 +15,27 @@ void Level::loadBackgroundImages()
     }
 }
 
-Level *Level::make(int screenWidth, int screenHeight)
+Level *Level::make(TexturesContainer *container, int screenWidth, int screenHeight)
 {
     Level *level = new Level(screenWidth, screenHeight);
     level->loadBackgroundImages();
+    Vector2 knightPosition({.x = (float)(screenWidth / 2) + 200, .y = (float)(screenHeight / 2)});
+    level->cpuPlayer = Enemy::make(container, knightPosition);
+    level->cpuPlayer->setMaxSpeed(KNIGHT_MAX_SPEED / 2);
     return level;
+}
+
+void Level::addConstrainOn(Sprite *sprite)
+{
+    cpuPlayer->addConstrain(new DogChaseConstrain(cpuPlayer, sprite));
+}
+
+void Level::detectCollisions(Sprite *sprite)
+{
+    if (CheckCollisionRecs(sprite->rectacngle(), cpuPlayer->rectacngle()))
+    {
+        cpuPlayer->attack();
+    }
 }
 
 void Level::move()
@@ -32,6 +48,7 @@ void Level::move()
             positions[i] = 0;
         }
     }
+    cpuPlayer->move();
 }
 
 void Level::draw()
@@ -43,6 +60,7 @@ void Level::draw()
     DrawTexture(backgrounds[2], positions[2], backgrounds[2].height, WHITE);
     DrawTexture(backgrounds[1], positions[1], screenHeight - backgrounds[1].height, WHITE);
     DrawTexture(backgrounds[0], positions[0], screenHeight - backgrounds[0].height, WHITE);
+    cpuPlayer->draw();
 }
 
 Level::~Level()
@@ -52,4 +70,5 @@ Level::~Level()
     {
         UnloadTexture(background);
     }
+    delete cpuPlayer;
 }

@@ -2,8 +2,8 @@
 
 Sprite::Sprite(Vector2 position, Vector2 dimension, int maxSpeed) : position(position), dimension(dimension), maxSpeed(maxSpeed), speed(maxSpeed)
 {
-    setWalkDirection(Direction::None, Direction::Right);
-};
+    setWalkDirection(Direction::None, Direction::None);
+}
 
 void Sprite::setWalkDirection(Direction x, Direction y)
 {
@@ -17,6 +17,12 @@ void Sprite::setWalkDirection(Direction x, Direction y)
     {
         walkDirection.y = y == Direction::Down ? 1 : -1;
     }
+}
+
+void Sprite::moveBy(float x, float y)
+{
+    walkDirection.x = x;
+    walkDirection.y = y;
 }
 
 void Sprite::moveBy(Direction x, Direction y)
@@ -34,7 +40,12 @@ void Sprite::flipDirection()
 {
     walkDirection.x *= -1;
     walkDirection.y *= -1;
-    moveBy((Direction)walkDirection.x, (Direction)walkDirection.y);
+    moveBy(walkDirection.x, walkDirection.y);
+}
+
+Vector2 Sprite::getPosition()
+{
+    return position;
 }
 
 Vector2 Sprite::center()
@@ -43,7 +54,7 @@ Vector2 Sprite::center()
             position.y + dimension.y / 2};
 }
 
-Rectangle Sprite::box()
+Rectangle Sprite::rectacngle()
 {
     return {position.x, position.y, dimension.x, dimension.y};
 }
@@ -58,9 +69,40 @@ std::vector<Constrain *> Sprite::getConstrains()
     return constrains;
 }
 
+std::vector<Constrain *> Sprite::getAbilities()
+{
+    return abilities;
+}
+
 Vector2 Sprite::getWalkDirection()
 {
     return walkDirection;
+}
+
+void Sprite::setSpeed(int speed)
+{
+    if (speed >= 0)
+    {
+        this->speed = speed;
+    }
+}
+
+int Sprite::getSpeed()
+{
+    return speed;
+}
+
+void Sprite::setMaxSpeed(int speed)
+{
+    if (speed >= 0)
+    {
+        this->maxSpeed = speed;
+    }
+}
+
+int Sprite::getMaxSpeed()
+{
+    return maxSpeed;
 }
 
 Sprite::~Sprite()

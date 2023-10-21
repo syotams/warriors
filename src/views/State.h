@@ -24,5 +24,7 @@ public:
     void setCurrentFrame(int current);
     int getFramesPerSecond();
     int getCurrentFrame();
+    void reset();
+    bool isCompleted();
 };
 #endif

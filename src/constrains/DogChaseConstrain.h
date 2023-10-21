@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <cmath>
-#include "../sprite.h"
-#include "constrain.h"
+#include "../models/Sprite.h"
+#include "Constrain.h"
 
 class DogChaseConstrain : public Constrain
 {
@@ -14,7 +14,7 @@ class DogChaseConstrain : public Constrain
 
 public:
     DogChaseConstrain(Sprite *chaser, Sprite *chased) : chaser(chaser), chased(chased){};
-    virtual ~DogChaseConstrain();
+    ~DogChaseConstrain();
     void apply();
 };
 #endif

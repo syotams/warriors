@@ -34,6 +34,17 @@ int State::getCurrentFrame()
     return currentFrame;
 }
 
+void State::reset()
+{
+    currentFrame = 0;
+    framesCounter = 0;
+}
+
+bool State::isCompleted()
+{
+    return currentFrame >= 9;
+}
+
 State::~State()
 {
     log("State::~State() nothing to destruct");
