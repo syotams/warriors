@@ -20,21 +20,24 @@ class Knight : public Sprite
 {
 private:
     std::map<KnightStates, State *> states;
-    KnightStates currentState;
-    Direction lookDirection[2];
 
+protected:
     Knight(Vector2 position, Vector2 dimension, int maxSpeed);
     void setLookDirection(Vector2 dir);
     void setState(KnightStates name);
+
+    KnightStates currentState;
+    Direction lookDirection[2];
 
 public:
     static Knight *make(TexturesContainer *container, Vector2 position);
     State *getState();
     void addState(KnightStates name, State *state);
     KnightStates getKnightState();
-    void move();
+    virtual void move();
     void draw();
     void attack();
+    void walk();
     void idle();
     ~Knight();
 };

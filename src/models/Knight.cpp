@@ -12,7 +12,7 @@ Knight *Knight::make(TexturesContainer *container, Vector2 position)
     knight->addState(KnightStates::Idle, IdleState::make(container));
     knight->addState(KnightStates::Walk, WalkState::make(container));
     knight->addState(KnightStates::Attack, AttackState::make(container));
-    knight->setState(KnightStates::Idle);
+    knight->idle();
     return knight;
 }
 
@@ -54,12 +54,30 @@ void Knight::move()
 
 void Knight::attack()
 {
+    if (currentState != KnightStates::Attack)
+    {
+        getState()->reset();
+    }
     setState(KnightStates::Attack);
     setSpeed(0);
 }
 
+void Knight::walk()
+{
+    if (currentState != KnightStates::Walk)
+    {
+        getState()->reset();
+    }
+    setState(KnightStates::Walk);
+    setSpeed(getMaxSpeed());
+}
+
 void Knight::idle()
 {
+    if (currentState != KnightStates::Idle)
+    {
+        getState()->reset();
+    }
     setState(KnightStates::Idle);
     setSpeed(0);
 }
