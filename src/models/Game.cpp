@@ -2,17 +2,17 @@
 
 void Game::loadTextures()
 {
-    char file1[] = "resources/knight/png/Idle (%d).png";
+    char file1[] = "resources/melee/png/Idle (%d).png";
     std::array<Texture2D *, 2> textures = load_lr_animated_images(10, file1, TEXTURE_SIZE);
     textures_container_add_texture(&container, TexturesNames::Knight_Idle_Right, textures[0]);
     textures_container_add_texture(&container, TexturesNames::Knight_Idle_Left, textures[1]);
 
-    char file2[] = "resources/knight/png/Run (%d).png";
+    char file2[] = "resources/melee/png/Run (%d).png";
     textures = load_lr_animated_images(10, file2, TEXTURE_SIZE);
     textures_container_add_texture(&container, TexturesNames::Knight_Run_Right, textures[0]);
     textures_container_add_texture(&container, TexturesNames::Knight_Run_Left, textures[1]);
 
-    char file3[] = "resources/knight/png/Attack (%d).png";
+    char file3[] = "resources/melee/png/Attack (%d).png";
     textures = load_lr_animated_images(10, file3, TEXTURE_SIZE);
     textures_container_add_texture(&container, TexturesNames::Knight_Attack_Right, textures[0]);
     textures_container_add_texture(&container, TexturesNames::Knight_Attack_Left, textures[1]);
@@ -37,12 +37,12 @@ Game *Game::make(int screenWidth, int screenHeight)
     return game;
 }
 
-Knight *Game::createPlayer()
+SwordMan *Game::createPlayer()
 {
     Vector2 knightPosition({.x = (float)(screenWidth / 2), .y = (float)(screenHeight / 2)});
-    Knight *knight = Knight::make(&container, knightPosition);
-    knight->addConstrain(new SimpleConstrain(knight));
-    return knight;
+    SwordMan *swordMan = SwordMan::make(&container, knightPosition);
+    swordMan->addConstrain(new SimpleConstrain(swordMan));
+    return swordMan;
 }
 
 void Game::move()

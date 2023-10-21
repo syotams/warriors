@@ -1,22 +1,22 @@
-#include "Knight.h"
+#include "SwordMan.h"
 
-Knight::Knight(Vector2 position, Vector2 dimension, int maxSpeed) : Sprite(position, dimension, maxSpeed)
+SwordMan::SwordMan(Vector2 position, Vector2 dimension, int maxSpeed) : Sprite(position, dimension, maxSpeed)
 {
     setSpeed(0);
     lookDirection[0] = Direction::Right;
 }
 
-Knight *Knight::make(TexturesContainer *container, Vector2 position)
+SwordMan *SwordMan::make(TexturesContainer *container, Vector2 position)
 {
-    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
-    knight->addState(KnightStates::Idle, IdleState::make(container));
-    knight->addState(KnightStates::Walk, WalkState::make(container));
-    knight->addState(KnightStates::Attack, AttackState::make(container));
-    knight->idle();
-    return knight;
+    SwordMan *swordMan = new SwordMan(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
+    swordMan->addState(WarriorStates::Idle, IdleState::make(container));
+    swordMan->addState(WarriorStates::Walk, WalkState::make(container));
+    swordMan->addState(WarriorStates::Attack, AttackState::make(container));
+    swordMan->idle();
+    return swordMan;
 }
 
-void Knight::move()
+void SwordMan::move()
 {
     std::vector<Constrain *> constrains = getConstrains();
     if (constrains.size() > 0)
@@ -31,13 +31,13 @@ void Knight::move()
     setLookDirection(walkDirection);
 
     // Handle attack states (temporary)
-    if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && !getState()->isCompleted()))
+    if (IsKeyDown(KEY_SPACE) || (currentState == WarriorStates::Attack && !getState()->isCompleted()))
     {
         attack();
     }
     else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
-        setState(KnightStates::Walk);
+        setState(WarriorStates::Walk);
         setSpeed(getMaxSpeed());
     }
     else
@@ -52,68 +52,68 @@ void Knight::move()
     getState()->move();
 }
 
-void Knight::attack()
+void SwordMan::attack()
 {
-    if (currentState != KnightStates::Attack)
+    if (currentState != WarriorStates::Attack)
     {
         getState()->reset();
     }
-    setState(KnightStates::Attack);
+    setState(WarriorStates::Attack);
     setSpeed(0);
 }
 
-void Knight::walk()
+void SwordMan::walk()
 {
-    if (currentState != KnightStates::Walk)
+    if (currentState != WarriorStates::Walk)
     {
         getState()->reset();
     }
-    setState(KnightStates::Walk);
+    setState(WarriorStates::Walk);
     setSpeed(getMaxSpeed());
 }
 
-void Knight::idle()
+void SwordMan::idle()
 {
-    if (currentState != KnightStates::Idle)
+    if (currentState != WarriorStates::Idle)
     {
         getState()->reset();
     }
-    setState(KnightStates::Idle);
+    setState(WarriorStates::Idle);
     setSpeed(0);
 }
 
-void Knight::draw()
+void SwordMan::draw()
 {
     getState()->draw(position, lookDirection);
     Rectangle rect = rectacngle();
     DrawRectangleLines(position.x, position.y, rect.width, rect.height, BLACK);
 }
 
-void Knight::addState(KnightStates name, State *state)
+void SwordMan::addState(WarriorStates name, State *state)
 {
     this->states.insert(std::make_pair(name, state));
 }
 
-State *Knight::getState()
+State *SwordMan::getState()
 {
     return states.find(currentState)->second;
 }
 
-void Knight::setState(KnightStates name)
+void SwordMan::setState(WarriorStates name)
 {
-    std::map<KnightStates, State *>::iterator itr = states.find(name);
+    std::map<WarriorStates, State *>::iterator itr = states.find(name);
     if (itr != states.end())
     {
         this->currentState = name;
     }
 }
 
-KnightStates Knight::getKnightState()
+WarriorStates SwordMan::getKnightState()
 {
     return currentState;
 }
 
-void Knight::setLookDirection(Vector2 direction)
+void SwordMan::setLookDirection(Vector2 direction)
 {
     if (direction.x != 0)
     {
@@ -125,10 +125,10 @@ void Knight::setLookDirection(Vector2 direction)
     }
 }
 
-Knight::~Knight()
+SwordMan::~SwordMan()
 {
-    log("Knight::~Knight() destructing player states and constrains");
-    for (std::map<KnightStates, State *>::iterator itr = states.begin(); itr != states.end(); itr++)
+    log("SwordMan::~SwordMan() destructing player states and constrains");
+    for (std::map<WarriorStates, State *>::iterator itr = states.begin(); itr != states.end(); itr++)
     {
         delete (itr->second);
     }

@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 position, Vector2 dimension, int maxSpeed) : Knight(position, dimension, maxSpeed)
+Enemy::Enemy(Vector2 position, Vector2 dimension, int maxSpeed) : SwordMan(position, dimension, maxSpeed)
 {
     setSpeed(0);
     lookDirection[0] = Direction::Right;
@@ -8,12 +8,12 @@ Enemy::Enemy(Vector2 position, Vector2 dimension, int maxSpeed) : Knight(positio
 
 Enemy *Enemy::make(TexturesContainer *container, Vector2 position)
 {
-    Enemy *knight = new Enemy(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
-    knight->addState(KnightStates::Idle, IdleState::make(container));
-    knight->addState(KnightStates::Walk, WalkState::make(container));
-    knight->addState(KnightStates::Attack, AttackState::make(container));
-    knight->idle();
-    return knight;
+    Enemy *swordMan = new Enemy(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
+    swordMan->addState(WarriorStates::Idle, IdleState::make(container));
+    swordMan->addState(WarriorStates::Walk, WalkState::make(container));
+    swordMan->addState(WarriorStates::Attack, AttackState::make(container));
+    swordMan->idle();
+    return swordMan;
 }
 
 void Enemy::move()
@@ -31,7 +31,7 @@ void Enemy::move()
     setLookDirection(walkDirection);
 
     // Handle attack state on collision
-    if (currentState == KnightStates::Attack && !getState()->isCompleted())
+    if (currentState == WarriorStates::Attack && !getState()->isCompleted())
     {
         attack();
     }

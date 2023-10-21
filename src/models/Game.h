@@ -3,7 +3,7 @@
 #define GAME_H_
 
 #include "raylib.h"
-#include "Knight.h"
+#include "SwordMan.h"
 #include "Level.h"
 #include "../textures_container.h"
 #include "../helpers/Log.h"
@@ -13,13 +13,13 @@ class Game
 private:
     int screenWidth;
     int screenHeight;
-    Knight *player;
+    SwordMan *player;
     Level *level;
     TexturesContainer container;
 
     void loadTextures();
     void nextLevel();
-    Knight *createPlayer();
+    SwordMan *createPlayer();
 
 public:
     Game(int screenWidth, int screenHeight);

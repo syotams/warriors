@@ -7,7 +7,7 @@
 #include "../helpers/ImageLoader.h"
 #include "../helpers/Log.h"
 #include "../Constants.h"
-#include "Knight.h"
+#include "SwordMan.h"
 #include "Enemy.h"
 #include "../textures_container.h"
 #include "../constrains/DogChaseConstrain.h"

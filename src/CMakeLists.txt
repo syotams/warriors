@@ -10,7 +10,7 @@ add_executable(
     helpers/Log.cpp
     models/Game.cpp
     models/Sprite.cpp
-    models/Knight.cpp 
+    models/SwordMan.cpp 
     models/Enemy.cpp 
     models/Level.cpp
     views/State.cpp 
