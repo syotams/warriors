@@ -49,6 +49,7 @@ void Game::move()
 {
     player->move();
     level->move();
+    level->detectCollisions(player);
 }
 
 void Game::draw()

@@ -1,11 +1,11 @@
-#include "FollowerConstrain.h"
+#include "GridChaseConstrain.h"
 
-FollowerConstrain::~FollowerConstrain()
+GridChaseConstrain::~GridChaseConstrain()
 {
-    std::cout << "*** in FollowerConstrain::~FollowerConstrain\n";
+    std::cout << "*** in GridChaseConstrain::~GridChaseConstrain\n";
 }
 
-void FollowerConstrain::apply()
+void GridChaseConstrain::apply()
 {
     Vector2 chaserPosition = chaser->getPosition();
     Vector2 chasedPosition = chased->getPosition();

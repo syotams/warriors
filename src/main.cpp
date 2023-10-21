@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "raylib.h"
-#include "models/Knight.h"
 #include "models/Level.h"
 #include "Constants.h"
 #include "models/Game.h"

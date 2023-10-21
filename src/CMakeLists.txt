@@ -11,12 +11,14 @@ add_executable(
     models/Game.cpp
     models/Sprite.cpp
     models/Knight.cpp 
+    models/Enemy.cpp 
     models/Level.cpp
     views/State.cpp 
     views/IdleState.cpp 
     views/WalkState.cpp 
     views/AttackState.cpp
-    constrains/FollowerConstrain.cpp
+    constrains/GridChaseConstrain.cpp
+    constrains/DogChaseConstrain.cpp
     constrains/SimpleConstrain.cpp
     constrains/ScreenConstrain.cpp
 )

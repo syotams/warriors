@@ -8,7 +8,7 @@ Knight::Knight(Vector2 position, Vector2 dimension, int maxSpeed) : Sprite(posit
 
 Knight *Knight::make(TexturesContainer *container, Vector2 position)
 {
-    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
+    Knight *knight = new Knight(position, {.x = TEXTURE_SIZE * 0.75, .y = TEXTURE_SIZE}, KNIGHT_MAX_SPEED);
     knight->addState(KnightStates::Idle, IdleState::make(container));
     knight->addState(KnightStates::Walk, WalkState::make(container));
     knight->addState(KnightStates::Attack, AttackState::make(container));
@@ -31,10 +31,9 @@ void Knight::move()
     setLookDirection(walkDirection);
 
     // Handle attack states (temporary)
-    if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && getState()->getCurrentFrame() < 9))
+    if (IsKeyDown(KEY_SPACE) || (currentState == KnightStates::Attack && !getState()->isCompleted()))
     {
-        setState(KnightStates::Attack);
-        setSpeed(0);
+        attack();
     }
     else if (walkDirection.x != 0 || walkDirection.y != 0)
     {
@@ -43,8 +42,7 @@ void Knight::move()
     }
     else
     {
-        setState(KnightStates::Idle);
-        setSpeed(0);
+        idle();
     }
 
     int speed = getSpeed();
@@ -54,9 +52,23 @@ void Knight::move()
     getState()->move();
 }
 
+void Knight::attack()
+{
+    setState(KnightStates::Attack);
+    setSpeed(0);
+}
+
+void Knight::idle()
+{
+    setState(KnightStates::Idle);
+    setSpeed(0);
+}
+
 void Knight::draw()
 {
     getState()->draw(position, lookDirection);
+    Rectangle rect = rectacngle();
+    DrawRectangleLines(position.x, position.y, rect.width, rect.height, BLACK);
 }
 
 void Knight::addState(KnightStates name, State *state)

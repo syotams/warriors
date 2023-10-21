@@ -1,6 +1,6 @@
 #pragma once
-#ifndef KNIGHT_H_
-#define KNIGHT_H_
+#ifndef ENEMY_H_
+#define ENEMY_H_
 
 #include <iostream>
 #include <map>
@@ -16,27 +16,28 @@
 #include "../helpers/Log.h"
 #include "Sprite.h"
 
-class Knight : public Sprite
+class Enemy : public Sprite
 {
 private:
     std::map<KnightStates, State *> states;
     KnightStates currentState;
     Direction lookDirection[2];
 
-    Knight(Vector2 position, Vector2 dimension, int maxSpeed);
+    Enemy(Vector2 position, Vector2 dimension, int maxSpeed);
     void setLookDirection(Vector2 dir);
     void setState(KnightStates name);
 
 public:
-    static Knight *make(TexturesContainer *container, Vector2 position);
+    static Enemy *make(TexturesContainer *container, Vector2 position);
     State *getState();
     void addState(KnightStates name, State *state);
     KnightStates getKnightState();
     void move();
     void draw();
     void attack();
+    void walk();
     void idle();
-    ~Knight();
+    ~Enemy();
 };
 
-#endif // KNIGHT_H_
+#endif // ENEMY_H_

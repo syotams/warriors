@@ -39,7 +39,7 @@ public:
     Vector2 getWalkDirection();
     Vector2 getPosition();
     Vector2 center();
-    Rectangle box();
+    Rectangle rectacngle();
     void setSpeed(int speed);
     int getSpeed();
     void setMaxSpeed(int speed);

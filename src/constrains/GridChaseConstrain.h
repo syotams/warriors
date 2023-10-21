@@ -7,15 +7,15 @@
 #include "../models/Sprite.h"
 #include "Constrain.h"
 
-class FollowerConstrain : public Constrain
+class GridChaseConstrain : public Constrain
 {
     Sprite *chaser;
     Sprite *chased;
     int grid_size;
 
 public:
-    FollowerConstrain(Sprite *chaser, Sprite *chased, int grid_size) : chaser(chaser), chased(chased), grid_size(grid_size){};
-    virtual ~FollowerConstrain();
+    GridChaseConstrain(Sprite *chaser, Sprite *chased, int grid_size) : chaser(chaser), chased(chased), grid_size(grid_size){};
+    virtual ~GridChaseConstrain();
     void apply();
 };
 

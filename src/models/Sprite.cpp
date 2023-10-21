@@ -54,7 +54,7 @@ Vector2 Sprite::center()
             position.y + dimension.y / 2};
 }
 
-Rectangle Sprite::box()
+Rectangle Sprite::rectacngle()
 {
     return {position.x, position.y, dimension.x, dimension.y};
 }

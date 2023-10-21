@@ -14,7 +14,7 @@ class DogChaseConstrain : public Constrain
 
 public:
     DogChaseConstrain(Sprite *chaser, Sprite *chased) : chaser(chaser), chased(chased){};
-    virtual ~DogChaseConstrain();
+    ~DogChaseConstrain();
     void apply();
 };
 #endif

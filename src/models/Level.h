@@ -7,9 +7,10 @@
 #include "../helpers/ImageLoader.h"
 #include "../helpers/Log.h"
 #include "../Constants.h"
-#include "../models/Knight.h"
+#include "Knight.h"
+#include "Enemy.h"
 #include "../textures_container.h"
-#include "../constrains/FollowerConstrain.h"
+#include "../constrains/DogChaseConstrain.h"
 
 class Level
 {
@@ -18,7 +19,7 @@ private:
     const int TOTAL_IMAGES = 6;
     int positions[6];
     Texture2D backgrounds[6];
-    Knight *cpuPlayer;
+    Enemy *cpuPlayer;
 
     void loadBackgroundImages();
 
@@ -27,6 +28,7 @@ public:
     ~Level();
     static Level *make(TexturesContainer *container, int screenWidth, int screenHeight);
     void addConstrainOn(Sprite *sprite);
+    void detectCollisions(Sprite *sprite);
     void move();
     void draw();
 };

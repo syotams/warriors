@@ -16,11 +16,13 @@ void IdleState::draw(Vector2 position, Direction *direction)
 {
     if (Direction::Right == direction[0])
     {
-        DrawTextureV(rTextures[getCurrentFrame()], position, WHITE);
+        DrawTextureRec(rTextures[getCurrentFrame()], {.x = 5, .y = 0, .width = 66, .height = 96}, position, WHITE);
+        // DrawTextureV(rTextures[getCurrentFrame()], position, WHITE);
     }
     else if (Direction::Left == direction[0])
     {
-        DrawTextureV(lTextures[getCurrentFrame()], position, WHITE);
+        DrawTextureRec(lTextures[getCurrentFrame()], {.x = 5, .y = 0, .width = 66, .height = 96}, position, WHITE);
+        // DrawTextureV(lTextures[getCurrentFrame()], position, WHITE);
     }
 }
 
